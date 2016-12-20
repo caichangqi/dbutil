@@ -91,7 +91,9 @@ public class BaseDaoImpl implements BaseDao {
                 Map<String, String> item = new HashMap<String, String>();
                 for (int i = 1; i <= columnCount; i ++) {
                     // 以结果集中的列名为 key, 对应的值为 value.
-                    item.put(rsmd.getColumnName(i), rs.getString(i));
+                    // getColumnName(int i) 获取的是真实的字段名
+                    // getColumnLabel(int i) 可以获取别名
+                    item.put(rsmd.getColumnLabel(i), rs.getString(i));
                 }
                 list.add(item);
             }

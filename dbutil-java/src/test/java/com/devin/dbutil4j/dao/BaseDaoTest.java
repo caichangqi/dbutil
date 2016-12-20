@@ -53,7 +53,7 @@ public class BaseDaoTest {
         BaseDao baseDao = new BaseDaoImpl();
 
         // select  测试
-        String sql = "select * from mybatis_users";
+        String sql = "SELECT id, name user_name, age user_age FROM mybatis_users;";
 
         List<Map<String, String>> result = baseDao.executeQuery(sql, null);
 
