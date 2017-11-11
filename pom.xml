@@ -8,7 +8,10 @@
     <packaging>jar</packaging>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mysql.version>5.1.35</mysql.version>
         <junit.version>4.12</junit.version>
         <log4j.version>2.7</log4j.version>
