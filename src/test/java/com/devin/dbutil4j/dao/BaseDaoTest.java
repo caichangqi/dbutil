@@ -1,9 +1,9 @@
 package com.devin.dbutil4j.dao;
 
 import com.devin.dbutil4j.dao.impl.BaseDaoImpl;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +12,7 @@ import java.util.Map;
  * Created by devin on 2016/12/15.
  */
 public class BaseDaoTest {
-    private static Logger logger =
-            LogManager.getLogger(BaseDaoTest.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(BaseDaoTest.class);
 
     @Test
     public void testBaseDaoInsert() {
@@ -53,7 +52,7 @@ public class BaseDaoTest {
         BaseDao baseDao = new BaseDaoImpl();
 
         // select  测试
-        String sql = "SELECT id, name user_name, age user_age FROM mybatis_users;";
+        String sql = "SELECT * FROM drools_rule_cond_tpl;";
 
         List<Map<String, String>> result = baseDao.executeQuery(sql, null);
 

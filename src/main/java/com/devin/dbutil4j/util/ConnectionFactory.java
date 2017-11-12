@@ -1,8 +1,7 @@
 package com.devin.dbutil4j.util;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +21,7 @@ public class ConnectionFactory {
     private static String username;
     private static String password;
 
-    private static Logger logger = LogManager.getLogger(ConnectionFactory.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(ConnectionFactory.class);
 
     private static final ConnectionFactory CONNECTION_FACTORY = new ConnectionFactory();
 
@@ -40,7 +39,8 @@ public class ConnectionFactory {
             // 加载配置属性
             properties.load(is);
         } catch (IOException e) {
-            logger.catching(Level.ERROR, e);
+            logger.error("加载配置文件失败 {}", e);
+            e.printStackTrace();
         }
 
         driver = properties.getProperty("driver");
@@ -68,12 +68,10 @@ public class ConnectionFactory {
         try {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException e) {
-            logger.catching(Level.ERROR, e);
-        } catch (SQLException e) {
-            logger.catching(Level.ERROR, e);
+        } catch (ClassNotFoundException | SQLException e) {
+            logger.error("打开数据库连接失败 {}", e);
+            e.printStackTrace();
         }
-
         return connection;
     }
 }

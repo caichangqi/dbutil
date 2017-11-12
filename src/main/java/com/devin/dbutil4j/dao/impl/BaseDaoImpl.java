@@ -2,9 +2,8 @@ package com.devin.dbutil4j.dao.impl;
 
 import com.devin.dbutil4j.dao.BaseDao;
 import com.devin.dbutil4j.util.ConnectionFactory;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.Map;
  * Created by devin on 2016/12/15.
  */
 public class BaseDaoImpl implements BaseDao {
-    private static Logger logger = LogManager.getLogger(BaseDaoImpl.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(BaseDaoImpl.class);
 
     private Connection conn;
 
@@ -51,7 +50,8 @@ public class BaseDaoImpl implements BaseDao {
 
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.catching(Level.ERROR, e);
+            logger.error("execute update error {}", e);
+            e.printStackTrace();
         } finally {
             closeAll(conn, preparedStatement, null);
         }
@@ -98,7 +98,8 @@ public class BaseDaoImpl implements BaseDao {
                 list.add(item);
             }
         } catch (SQLException e) {
-            logger.catching(Level.ERROR, e);
+            logger.error("execute query error {}", e);
+            e.printStackTrace();
         } finally {
             closeAll(conn, preparedStatement, rs);
         }
@@ -112,7 +113,8 @@ public class BaseDaoImpl implements BaseDao {
                 rs.close();
             }
         } catch (SQLException e) {
-            logger.catching(Level.ERROR, e);
+            logger.error("关闭结果集失败 {}", e);
+            e.printStackTrace();
         }
 
         try {
@@ -120,7 +122,8 @@ public class BaseDaoImpl implements BaseDao {
                 ps.close();
             }
         } catch (SQLException e) {
-            logger.catching(Level.ERROR, e);
+            logger.error("关闭预处理语句失败 {}", e);
+            e.printStackTrace();
         }
 
         try {
@@ -128,7 +131,8 @@ public class BaseDaoImpl implements BaseDao {
                 conn.close();
             }
         } catch (SQLException e) {
-            logger.catching(Level.ERROR, e);
+            logger.error("关闭连接失败 {}", e);
+            e.printStackTrace();
         }
     }
 }
