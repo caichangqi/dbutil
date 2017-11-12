@@ -22,22 +22,12 @@ public class BaseDaoImpl implements BaseDao {
     public BaseDaoImpl() {
     }
 
-    public Connection getConn() {
-        return conn;
-    }
-
-    public void setConn(Connection conn) {
-        this.conn = conn;
-    }
-
     @Override
     public int executeUpdate(String sql, Object[] params) {
         int result = 0;
 
         // 获取数据库连接
-        if (null == conn) {
-            conn = ConnectionFactory.getInstance().openConnection();
-        }
+        conn = ConnectionFactory.getInstance().openConnection();
 
         PreparedStatement preparedStatement = null;
         try {
@@ -51,7 +41,7 @@ public class BaseDaoImpl implements BaseDao {
 
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("execute update error {}", e);
+            logger.error("execute update error", e);
             e.printStackTrace();
         } finally {
             closeAll(conn, preparedStatement, null);
@@ -65,9 +55,7 @@ public class BaseDaoImpl implements BaseDao {
         List<Map<String, String>> list = new ArrayList<>();
 
         // 获取数据库连接
-        if (null == conn) {
-            conn = ConnectionFactory.getInstance().openConnection();
-        }
+        conn = ConnectionFactory.getInstance().openConnection();
 
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -100,7 +88,7 @@ public class BaseDaoImpl implements BaseDao {
                 list.add(item);
             }
         } catch (SQLException e) {
-            logger.error("execute query error {}", e);
+            logger.error("execute query error", e);
             e.printStackTrace();
         } finally {
             closeAll(conn, preparedStatement, rs);
@@ -115,7 +103,7 @@ public class BaseDaoImpl implements BaseDao {
                 rs.close();
             }
         } catch (SQLException e) {
-            logger.error("关闭结果集失败 {}", e);
+            logger.error("关闭结果集失败", e);
             e.printStackTrace();
         }
 
@@ -124,7 +112,7 @@ public class BaseDaoImpl implements BaseDao {
                 ps.close();
             }
         } catch (SQLException e) {
-            logger.error("关闭预处理语句失败 {}", e);
+            logger.error("关闭预处理语句失败", e);
             e.printStackTrace();
         }
 
@@ -133,7 +121,7 @@ public class BaseDaoImpl implements BaseDao {
                 conn.close();
             }
         } catch (SQLException e) {
-            logger.error("关闭连接失败 {}", e);
+            logger.error("关闭连接失败", e);
             e.printStackTrace();
         }
     }

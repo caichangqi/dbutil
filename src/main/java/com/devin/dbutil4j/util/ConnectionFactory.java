@@ -39,7 +39,7 @@ public class ConnectionFactory {
             // 加载配置属性
             properties.load(is);
         } catch (IOException e) {
-            logger.error("加载配置文件失败 {}", e);
+            logger.error("加载配置文件失败", e);
             e.printStackTrace();
         }
 
@@ -69,7 +69,7 @@ public class ConnectionFactory {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException | SQLException e) {
-            logger.error("打开数据库连接失败 {}", e);
+            logger.error("打开数据库连接失败", e);
             e.printStackTrace();
         }
         return connection;
