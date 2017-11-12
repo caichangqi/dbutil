@@ -14,13 +14,6 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql.version}</version>
     </dependency>
-
-    <!-- log4j -->
-    <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>${log4j.version}</version>
-    </dependency>
 </dependencies>
 ```
 3. 创建 db.properties
