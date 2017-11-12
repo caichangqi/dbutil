@@ -30,6 +30,7 @@ public class BaseDaoImpl implements BaseDao {
         this.conn = conn;
     }
 
+    @Override
     public int executeUpdate(String sql, Object[] params) {
         int result = 0;
 
@@ -59,8 +60,9 @@ public class BaseDaoImpl implements BaseDao {
         return result;
     }
 
+    @Override
     public List<Map<String, String>> executeQuery(String sql, Object[] params) {
-        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> list = new ArrayList<>();
 
         // 获取数据库连接
         if (null == conn) {
@@ -88,7 +90,7 @@ public class BaseDaoImpl implements BaseDao {
 
             // 遍历结果集
             while (rs.next()) {
-                Map<String, String> item = new HashMap<String, String>();
+                Map<String, String> item = new HashMap<>();
                 for (int i = 1; i <= columnCount; i ++) {
                     // 以结果集中的列名为 key, 对应的值为 value.
                     // getColumnName(int i) 获取的是真实的字段名
